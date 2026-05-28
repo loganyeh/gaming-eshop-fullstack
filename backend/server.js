@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/wishlist", async(req, res) => {
-    const games = await Game.find();
-    res.json(games);
+    const wishlist = await Wishlist.find();
+    res.json(wishlist);
 });
 
 app.post("/wishlist", async(req, res) => {
