@@ -8,7 +8,7 @@ import ShareButton from "../components/WishlistComps/ShareButton";
 import GamesWishlisted from "./GamesWishlisted";
 
 function Wishlist(){
-    const [isGamesInWishlist, setIsGamesInWishlist] = useState(false);
+    const [isGamesInWishlist, setIsGamesInWishlist] = useState(true);
     // can toggle on and off for wishlisted games
 
     return(
