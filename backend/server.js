@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import Wishlist from "./models/Wishlist";
 
 const app = express();
 
@@ -16,8 +17,22 @@ app.get("/", (req, res) => {
         message: "Server is running...",
     });
 });
- 
-// testing git 
+
+app.get("/wishlist", async(req, res) => {
+    const games = await Game.find();
+    res.json(games);
+});
+
+app.post("/wishlist", async(req, res) => {
+    const wishlistItem = await Wishlist.create({
+        game: req.body.game,
+    });
+
+    res.json({
+        message: "New game added to the wishlist",
+        data: wishlistItem,
+    });
+});
 
 app.listen(3000, () => {
     console.log("Server is running on Port 3000");
