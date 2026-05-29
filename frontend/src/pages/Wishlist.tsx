@@ -18,10 +18,12 @@ export type WishlistSchemaProp = {
 
 type WishlistProps = {
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
+    wishlistData: WishlistSchemaProp[],
+    setWishlistData: React.Dispatch<React.SetStateAction<WishlistSchemaProp[]>>,
 };
 
-function Wishlist({ setGameIdClick }: WishlistProps ){
-    const [wishlistData, setWishlistData] = useState<WishlistSchemaProp[]>([]);
+function Wishlist({ setGameIdClick, wishlistData, setWishlistData }: WishlistProps ){
+    // const [wishlistData, setWishlistData] = useState<WishlistSchemaProp[]>([]);
 
     useEffect(() => {
         async function getWishlist(){

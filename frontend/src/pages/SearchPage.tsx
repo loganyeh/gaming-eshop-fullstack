@@ -17,15 +17,18 @@ import { fetchAListOfGames } from "../api/rawg";
 
 // types
 import type { GamesObject } from "../api/rawg";
+import type { WishlistSchemaProp } from "./Wishlist";
 
 type SearchPageProps = {
     listOfGames: GamesObject[],
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
     defaultListOfGames: GamesObject[],
     // setDefaultListOfGames: React.Dispatch<React.SetStateAction<GamesObject[]>>,
+    wishlistData: WishlistSchemaProp[],
+    setWishlistData: React.Dispatch<React.SetStateAction<WishlistSchemaProp[]>>,
 };
 
-function SearchPage({ listOfGames, setGameIdClick, defaultListOfGames }: SearchPageProps ){
+function SearchPage({ listOfGames, setGameIdClick, defaultListOfGames, wishlistData, setWishlistData }: SearchPageProps ){
     // const [defaultListOfGames, setDefaultListOfGames] = useState<GamesObject[]>([]);
 
     // useEffect(() => {
@@ -49,9 +52,9 @@ function SearchPage({ listOfGames, setGameIdClick, defaultListOfGames }: SearchP
             
             {/* Game Results */}
             {listOfGames.length === 0 ?
-            <DigitalSectionComp data={defaultListOfGames.slice(0, 3)} title="Game results" setGameIdClick={setGameIdClick} />
+            <DigitalSectionComp data={defaultListOfGames.slice(0, 5)} title="Game results" setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />
             :
-            <DigitalSectionComp data={listOfGames} title="Game results" setGameIdClick={setGameIdClick} />
+            <DigitalSectionComp data={listOfGames} title="Game results" setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />
             }
 
             <div className="flex flex-col items-center">

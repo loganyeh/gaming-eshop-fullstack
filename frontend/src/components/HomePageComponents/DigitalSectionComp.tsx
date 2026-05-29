@@ -2,15 +2,18 @@ import { Link } from "react-router-dom";
 
 import type { DigitalType } from "../../data/HomePageData/DigitalData";
 import type { GamesObject } from "../../api/rawg";
+import type { WishlistSchemaProp } from "../../pages/Wishlist";
 
 type DigitalProp = {
     data: DigitalType[] | GamesObject[],
     title: string,
     setGameIdClick?: React.Dispatch<React.SetStateAction<number>>,
+    wishlistData: WishlistSchemaProp[],
+    setWishlistData: React.Dispatch<React.SetStateAction<WishlistSchemaProp[]>>,
 };
 
-function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
-
+function DigitalSectionComp({ data, title, setGameIdClick, wishlistData, setWishlistData }: DigitalProp ){
+    
     async function addGameToWishlist(game: GamesObject){
         const res = await fetch("http://localhost:3000/wishlist", {
             method: "POST",
@@ -27,6 +30,12 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
         const data = await res.json();
         console.log(`wishlist response`, data);
     };   
+
+    function wishlistToggle(gameID: number){
+        return wishlistData.some(
+            game => game.gameID === gameID,
+        );
+    };
 
     return(
         <>
@@ -63,7 +72,7 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
                                             <div className="text-[10px] md:text-xs">Games</div>
                                         </div>
                                         
-                                        <i onClick={() => addGameToWishlist(game)} className={`bx bxs-heart text-2xl text-gray-300 md:text-3xl cursor-pointer hover:text-red-600`}></i>
+                                        <i onClick={() => addGameToWishlist(game)} className={`bx bxs-heart text-2xl ${wishlistToggle(game.id) ? "text-red-600" : "text-gray-300 "} md:text-3xl cursor-pointer`}></i>
 
                                     </div>
                                 </div>

@@ -11,13 +11,16 @@ import AboutThisItem from "../components/GameInfoPageComponents/AboutThisItem";
 
 // type
 import type { GamesObject } from "../api/rawg";
+import type { WishlistSchemaProp } from "./Wishlist";
 
 type GameInfoPageProps = {
     gameInfoData: GamesObject,
+    wishlistData: WishlistSchemaProp[],
+    setWishlistData: React.Dispatch<React.SetStateAction<WishlistSchemaProp[]>>,
 };
 
 
-function GameInfoPage({ gameInfoData }: GameInfoPageProps ){
+function GameInfoPage({ gameInfoData, wishlistData, setWishlistData }: GameInfoPageProps ){
 
     return(
         <>
@@ -29,7 +32,7 @@ function GameInfoPage({ gameInfoData }: GameInfoPageProps ){
                 <GameBlurb description={gameInfoData?.description_raw} image={gameInfoData?.background_image} />
                 <RelatedTags />
                 <AboutThisItem />
-                <DigitalSectionComp data={bestSellersData} title="More like this" />
+                <DigitalSectionComp data={bestSellersData} title="More like this" wishlistData={wishlistData} setWishlistData={setWishlistData} />
                 {/* Fine Print */}
                 <p className="px-4 pt-12 w-full max-w-6xl text-[10px] md:text-xs xl:text-sm text-gray-700">
                     WARNING: If you have epilepsy or have had seizures or other unusual reactions to flashing lights or patterns, consult a doctor before playing video games. All users should read the Health and Safety Information available in the system settings before using this software.<br /><br />

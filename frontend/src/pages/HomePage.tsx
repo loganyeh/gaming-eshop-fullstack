@@ -15,13 +15,16 @@ import { bestSellersData, newReleasesData } from "../data/HomePageData/DigitalDa
 
 // types
 import type { GamesObject } from "../api/rawg";
+import type { WishlistSchemaProp } from "./Wishlist";
 
 type HomePageProps = {
     defaultListOfGames: GamesObject[],
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
+    wishlistData: WishlistSchemaProp[],
+    setWishlistData: React.Dispatch<React.SetStateAction<WishlistSchemaProp[]>>,
 };
 
-function HomePage({ defaultListOfGames, setGameIdClick }: HomePageProps ){
+function HomePage({ defaultListOfGames, setGameIdClick, wishlistData, setWishlistData }: HomePageProps ){
     
     return(
         <>
@@ -35,8 +38,8 @@ function HomePage({ defaultListOfGames, setGameIdClick }: HomePageProps ){
 
             <CharacterSectionComp data={characterSectionData} />
 
-            <DigitalSectionComp data={defaultListOfGames.slice(0, 1)} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
-            <DigitalSectionComp data={defaultListOfGames.slice(2, 3)} title="Digital new releases" setGameIdClick={setGameIdClick}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(0, 1)} title="Digital best sellers" setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(2, 3)} title="Digital new releases" setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData}/>
             {/* <DigitalSectionComp data={bestSellersData} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
             <DigitalSectionComp data={newReleasesData} title="Digital new releases" setGameIdClick={setGameIdClick}/> */}
         </>
