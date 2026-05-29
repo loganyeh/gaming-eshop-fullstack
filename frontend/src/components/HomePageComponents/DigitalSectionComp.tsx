@@ -20,6 +20,7 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
             body: JSON.stringify({ 
                 gameID: game.id,
                 name: game.name,
+                background_image: game.background_image,
              }),
         });
 

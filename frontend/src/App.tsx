@@ -26,7 +26,7 @@ function App() {
       async function getGames(){
         const data = await fetchGames(searchQuery);
         setListOfGames(data);
-        console.log(data.slice(0, 6));
+        // console.log(data.slice(0, 6));
       };
 
       if (searchQuery) getGames();
