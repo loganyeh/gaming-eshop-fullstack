@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import Wishlist from "./models/Wishlist";
+import Wishlist from "./models/Wishlist.js";
 
 const app = express();
 
@@ -25,11 +25,12 @@ app.get("/wishlist", async(req, res) => {
 
 app.post("/wishlist", async(req, res) => {
     const wishlistItem = await Wishlist.create({
-        game: req.body.game,
+        gameID: req.body.gameID,
+        name: req.body.name,
     });
 
     res.json({
-        message: "New game added to the wishlist",
+        message: `${wishlistItem.name} has been added to the wishlist`,
         data: wishlistItem,
     });
 });
