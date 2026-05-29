@@ -63,7 +63,7 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
                                             <div className="text-[10px] md:text-xs">Games</div>
                                         </div>
                                         
-                                        <i onClick={() => addGameToWishlist(game)} className='bx bx-heart text-2xl text-red-600md:text-3xl' ></i>
+                                        <i onClick={() => addGameToWishlist(game)} className='bx bxs-heart text-2xl text-red-600 md:text-3xl cursor-pointer hover:text-white'></i>
                                     </div>
                                 </div>
                             </div>
