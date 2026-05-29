@@ -24,11 +24,11 @@ function Header({ data, handleNavClick }: HeaderProp){
                         <h1 className="border-3 border-white px-1.5 w-fit font-bold text-white tracking-widest rounded-full">Nintendo</h1>
                     </Link>
 
-                    {data.map((header, _) => {
-                        return <div key={header.id} className="flex items-center gap-1">
+                    {data.map((header, index) => {
+                        return <Link to={index === 1 ? "/search" : "#"} key={index} className="flex items-center gap-1">
                                 <i className={`${header.boxicon} text-xl text-red-600`}></i>
                                 <h2 className="font-semibold text-gray-700">{header.text}</h2>
-                            </div>
+                            </Link>
                     })}
                 </div>
 

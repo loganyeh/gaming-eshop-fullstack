@@ -47,7 +47,7 @@ function Layout({ searchQuery, setSearchQuery, listOfGames, setGameIdClick }: La
         navigate("/wishlist");
       }
       else{
-        console.log(`clicked ${action}`)
+        // console.log(`clicked ${action}`)
       }
   };
 

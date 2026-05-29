@@ -11,6 +11,23 @@ type DigitalProp = {
 
 function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
 
+    async function addGameToWishlist(game: GamesObject){
+        const res = await fetch("http://localhost:3000/wishlist", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+                gameID: game.id,
+                name: game.name,
+             }),
+        });
+
+        const data = await res.json();
+        console.log(`wishlist response`, data);
+    };   
+
+
     return(
         <>
             <div className="flex justify-center w-full">
@@ -24,8 +41,10 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
                     {/* Game Slideshow */}
                     <div className="flex gap-8 pt-8 pb-6 pl-5 overflow-x-auto xl:pl-8">
                         {data.slice(0, 10).map((game, _) => {
-                            return <Link to={"/game"} onClick={() => setGameIdClick(game.id)} key={game.id} className="border border-gray-300 rounded-lg">
-                                        <div className="w-52 aspect-square bg-gray-300 bg-center bg-cover rounded-t-lg md:w-64" style={{ backgroundImage: `url(${game.url || game.background_image})`}}></div>
+                            return <div key={game.id} className="border border-gray-300 rounded-lg">
+                                        <Link to={"/game"} onClick={() => {setGameIdClick(game.id)}}>
+                                            <div className="w-52 aspect-square bg-gray-300 bg-center bg-cover rounded-t-lg md:w-64" style={{ backgroundImage: `url(${game.url || game.background_image})`}}></div>
+                                        </Link>
 
                                         <div className="flex flex-col gap-2 p-2 pt-4 md:p-4">
                                             <div className="min-h-16">
@@ -43,11 +62,11 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
                                                     <i className='bx bx-plus-medical' ></i>
                                                     <div className="text-[10px] md:text-xs">Games</div>
                                                 </div>
-
-                                                <i className='bx bx-heart text-2xl text-red-600md:text-3xl' ></i>
+                                                
+                                                <i onClick={() => addGameToWishlist(game)} className='bx bx-heart text-2xl text-red-600md:text-3xl' ></i>
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                         })}
 
                     </div>

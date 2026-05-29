@@ -11,6 +11,9 @@ function Wishlist(){
     const [isGamesInWishlist, setIsGamesInWishlist] = useState(true);
     // can toggle on and off for wishlisted games
 
+    // need to get wishlist collection in here or the components and show games added
+    // use the get route from the server.js
+
     return(
         <>
             {/* Page Title & Header */}
