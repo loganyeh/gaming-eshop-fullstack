@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import type { featureType } from "../../data/HomePageData/featureData";
 import type { GamesObject } from "../../api/rawg";
 
 type featureProp = {
     data: featureType[],
     defaultListOfGames: GamesObject[],
+    setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function FeaturedGames({ data, defaultListOfGames }: featureProp){
+function FeaturedGames({ data, defaultListOfGames, setGameIdClick }: featureProp){
 
     return(
         <>
@@ -17,10 +19,12 @@ function FeaturedGames({ data, defaultListOfGames }: featureProp){
 
                 {/* Featured Games */}
                 <div className="flex gap-6 py-5 overflow-x-auto lg:pl-4 xl:pl-0 ">
-                    {defaultListOfGames.slice(10, 20).map((game, index) => {
+                    {defaultListOfGames.slice(0, 1).map((game, index) => {
                         return <div key={index} className="border border-gray-300 w-52 rounded-lg shrink-0 md:w-64 ">
                             {/* Game Image */}
-                            <img src={game.background_image} alt="" className="aspect-video rounded-t-lg"/>
+                            <Link to={"/game"}>
+                                <img onClick={() => setGameIdClick(game.id)} src={game.background_image} alt="" className="aspect-video rounded-t-lg"/>
+                            </Link>
                             {/* <div className="aspect-video bg-gray-300 rounded-t-lg"></div> */}
 
                             {/* Game Info */}

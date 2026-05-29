@@ -27,7 +27,7 @@ function HomePage({ defaultListOfGames, setGameIdClick }: HomePageProps ){
         <>
             <GameShowcase data={showcaseData}/>
 
-            <FeaturedGames data={featureData} defaultListOfGames={defaultListOfGames} />
+            <FeaturedGames data={featureData} defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} />
 
             <RedButtonBlock data={redButtonData} />
 
@@ -35,8 +35,8 @@ function HomePage({ defaultListOfGames, setGameIdClick }: HomePageProps ){
 
             <CharacterSectionComp data={characterSectionData} />
 
-            <DigitalSectionComp data={defaultListOfGames.slice(0, 5)} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
-            <DigitalSectionComp data={defaultListOfGames.slice(5, 10)} title="Digital new releases" setGameIdClick={setGameIdClick}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(0, 1)} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(2, 3)} title="Digital new releases" setGameIdClick={setGameIdClick}/>
             {/* <DigitalSectionComp data={bestSellersData} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
             <DigitalSectionComp data={newReleasesData} title="Digital new releases" setGameIdClick={setGameIdClick}/> */}
         </>

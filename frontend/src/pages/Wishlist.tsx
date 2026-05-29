@@ -28,7 +28,7 @@ function Wishlist({ setGameIdClick }: WishlistProps ){
             const res = await fetch("http://localhost:3000/wishlist");
             const data = await res.json();
             setWishlistData(data);
-            console.log(data);
+            // console.log(data);
     
             return data;
         };

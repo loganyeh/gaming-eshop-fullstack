@@ -49,7 +49,7 @@ function SearchPage({ listOfGames, setGameIdClick, defaultListOfGames }: SearchP
             
             {/* Game Results */}
             {listOfGames.length === 0 ?
-            <DigitalSectionComp data={defaultListOfGames.slice(0, 10)} title="Game results" setGameIdClick={setGameIdClick} />
+            <DigitalSectionComp data={defaultListOfGames.slice(0, 3)} title="Game results" setGameIdClick={setGameIdClick} />
             :
             <DigitalSectionComp data={listOfGames} title="Game results" setGameIdClick={setGameIdClick} />
             }

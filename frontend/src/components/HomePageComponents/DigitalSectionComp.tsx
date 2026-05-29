@@ -40,7 +40,7 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
 
                     {/* Game Slideshow */}
                     <div className="flex gap-8 pt-8 pb-6 pl-5 overflow-x-auto xl:pl-8">
-                        {data.slice(0, 10).map((game, _) => {
+                        {data.map((game, _) => {
                             return <div key={game.id} className="border border-gray-300 rounded-lg">
                                 <Link to={"/game"} onClick={() => {setGameIdClick(game.id)}} className="">
                                     <div className="w-52 aspect-square bg-gray-300 bg-center bg-cover rounded-t-lg md:w-64" style={{ backgroundImage: `url(${game.url || game.background_image})`}}></div>
@@ -63,7 +63,8 @@ function DigitalSectionComp({ data, title, setGameIdClick }: DigitalProp ){
                                             <div className="text-[10px] md:text-xs">Games</div>
                                         </div>
                                         
-                                        <i onClick={() => addGameToWishlist(game)} className='bx bxs-heart text-2xl text-red-600 md:text-3xl cursor-pointer hover:text-white'></i>
+                                        <i onClick={() => addGameToWishlist(game)} className={`bx bxs-heart text-2xl text-gray-300 md:text-3xl cursor-pointer hover:text-red-600`}></i>
+
                                     </div>
                                 </div>
                             </div>
