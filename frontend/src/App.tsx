@@ -11,22 +11,32 @@ import Layout from './layout/Layout';
 
 // api
 import { fetchGames, fetchID } from './api/rawg';
+import { fetchAListOfGames } from './api/rawg';
+
   // types
 import type { GamesObject } from './api/rawg';
+import type { WishlistSchemaProp } from './pages/Wishlist';
 
 function App() {
+  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [listOfGames, setListOfGames] = useState<GamesObject[]>([]);
   const [gameIdClick, setGameIdClick] = useState<number>(654);
   const [gameInfoData, setGameInfoData] = useState<GamesObject | null>(null);
+  const [defaultListOfGames, setDefaultListOfGames] = useState<GamesObject[]>([]);
+  const [wishlistData, setWishlistData] = useState<WishlistSchemaProp[]>([]);
 
   // for listOfGames
   useEffect(() => {
     const timeout = setTimeout(() => {
       async function getGames(){
+        setLoading(true);
+
         const data = await fetchGames(searchQuery);
         setListOfGames(data);
-        console.log(data.slice(0, 6));
+        // console.log(data.slice(0, 6));
+
+        setLoading(false);
       };
 
       if (searchQuery) getGames();
@@ -47,15 +57,27 @@ function App() {
     getId();
   }, [gameIdClick]);
 
+  // default list of games
+  useEffect(() => {
+    async function getAListOfGames(){
+        const data = await fetchAListOfGames();
+        setDefaultListOfGames(data);
+
+        return data;
+    };
+
+    getAListOfGames();
+}, []);
+
 
   return (
     <>
       <Routes>
-        <Route element={<Layout searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames} setGameIdClick={setGameIdClick} />}>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/game' element={<GameInfoPage gameInfoData={gameInfoData} />} />
-          <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} />} />
-          <Route path='/wishlist' element={<Wishlist />} />
+        <Route element={<Layout loading={loading} setLoading={setLoading} searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames} setGameIdClick={setGameIdClick} />}>
+          <Route path='/' element={<HomePage defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
+          <Route path='/game' element={<GameInfoPage gameInfoData={gameInfoData} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
+          <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} defaultListOfGames={defaultListOfGames} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
+          <Route path='/wishlist' element={<Wishlist setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
         </Route>
       </Routes>
     </>

@@ -26,3 +26,11 @@ export async function fetchID(id: number){
     const data: GamesObject = await res.json();
     return data; 
 };
+
+// FETCH GET A LIST OF GAMES
+export async function fetchAListOfGames(){
+    const res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}`);
+    const data: GamesDataObject = await res.json();
+
+    return data.results;
+};

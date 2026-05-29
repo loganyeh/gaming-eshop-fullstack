@@ -1,11 +1,12 @@
 import WishlistTrail from "./WishlistTrail";
 import ShareButton from "./ShareButton";
+import type { WishlistSchemaProp } from "../../pages/Wishlist";
 
 type WishlistHeaderProps = {
-    isGamesInWishlist: boolean,
+    wishlistData: WishlistSchemaProp[],
 };
 
-function WishlistHeader({ isGamesInWishlist }: WishlistHeaderProps ){
+function WishlistHeader({ wishlistData }: WishlistHeaderProps ){
 
     return(
         <>
@@ -25,7 +26,7 @@ function WishlistHeader({ isGamesInWishlist }: WishlistHeaderProps ){
                     {/* Page Description and Share Button */}
                     <div className="xl:flex xl:justify-between">
                         <p className="text-sm font-normal text-gray-700 md:text-base lg:w-full lg:max-w-3xl">Explore, purchase, or remove items from your Wish List here. You can also share your current list with friends and family.</p>
-                        {isGamesInWishlist && <div className="hidden xl:flex">
+                        {wishlistData.length > 0 && <div className="hidden xl:flex">
                             <ShareButton />
                         </div>}
                     </div>

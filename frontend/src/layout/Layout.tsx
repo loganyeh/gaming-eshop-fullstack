@@ -18,13 +18,15 @@ import { footerData } from "../data/HomePageData/FooterData";
 import type { GamesObject } from "../api/rawg";
 
 type LayoutProps = {
+  loading: boolean,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   searchQuery: string,
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>,
   listOfGames: GamesObject[],
   setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function Layout({ searchQuery, setSearchQuery, listOfGames, setGameIdClick }: LayoutProps ){
+function Layout({ loading, setLoading, searchQuery, setSearchQuery, listOfGames, setGameIdClick }: LayoutProps ){
   const navigate = useNavigate();
   const [isSearchPopUp, setIsSearchPopUp] = useState(false);
   useEffect(() => {
@@ -47,7 +49,7 @@ function Layout({ searchQuery, setSearchQuery, listOfGames, setGameIdClick }: La
         navigate("/wishlist");
       }
       else{
-        console.log(`clicked ${action}`)
+        // console.log(`clicked ${action}`)
       }
   };
 
@@ -55,7 +57,8 @@ function Layout({ searchQuery, setSearchQuery, listOfGames, setGameIdClick }: La
     <>  
       <Header data={headerData} handleNavClick={handleNavClick} />
       <BottomNav data={navButtons} handleNavClick={handleNavClick} />
-      <PopUpSearch isSearchPopUp={isSearchPopUp} setIsSearchPopUp={setIsSearchPopUp} 
+      <PopUpSearch loading={loading} setLoading={setLoading}  
+      isSearchPopUp={isSearchPopUp} setIsSearchPopUp={setIsSearchPopUp} 
       searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames}
       setGameIdClick={setGameIdClick} />
 

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import Wishlist from "./models/Wishlist";
+import Wishlist from "./models/Wishlist.js";
 
 const app = express();
 
@@ -23,14 +23,39 @@ app.get("/wishlist", async(req, res) => {
     res.json(wishlist);
 });
 
+app.get("/wishlist/:gameID", async(req, res) => {
+    const wishlistItem = await Wishlist.findOne({
+        gameID: req.params.gameID,
+    });
+
+    res.json(wishlistItem);
+});
+
 app.post("/wishlist", async(req, res) => {
     const wishlistItem = await Wishlist.create({
-        game: req.body.game,
+        gameID: req.body.gameID,
+        name: req.body.name,
+        background_image: req.body.background_image,
     });
 
     res.json({
-        message: "New game added to the wishlist",
+        message: `${wishlistItem.name} has been added to the wishlist`,
         data: wishlistItem,
+    });
+});
+
+app.delete("/wishlist/:id", async (req, res) => {
+    const deletedGame = await Wishlist.findByIdAndDelete(req.params.id);
+
+    if(!deletedGame) {
+        return res.status(404).json({
+            message: "Game not found",
+        });
+    };
+
+    res.json({
+        message: "Game Deleted",
+        data: deletedGame,
     });
 });
 
