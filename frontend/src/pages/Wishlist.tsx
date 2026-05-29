@@ -16,7 +16,11 @@ export type WishlistSchemaProp = {
     background_image: string,
 };
 
-function Wishlist(){
+type WishlistProps = {
+    setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function Wishlist({ setGameIdClick }: WishlistProps ){
     const [wishlistData, setWishlistData] = useState<WishlistSchemaProp[]>([]);
 
     useEffect(() => {
@@ -43,7 +47,7 @@ function Wishlist(){
             </div>}
 
             {/* Wish List Games */}
-            {wishlistData.length > 0 && <GamesWishlisted data={wishlistData} setWishlistData={setWishlistData} />}
+            {wishlistData.length > 0 && <GamesWishlisted data={wishlistData} setWishlistData={setWishlistData} setGameIdClick={setGameIdClick} />}
 
             {wishlistData.length === 0 && <Notice />}
             {wishlistData.length === 0 && <Instructions />}

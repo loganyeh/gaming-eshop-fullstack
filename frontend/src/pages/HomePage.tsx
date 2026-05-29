@@ -13,13 +13,21 @@ import { bigNewsArticlesData, smallNewsArticlesData } from "../data/HomePageData
 import { characterSectionData } from "../data/HomePageData/CharacterSectionData";
 import { bestSellersData, newReleasesData } from "../data/HomePageData/DigitalData";
 
-function HomePage(){
+// types
+import type { GamesObject } from "../api/rawg";
+
+type HomePageProps = {
+    defaultListOfGames: GamesObject[],
+    setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function HomePage({ defaultListOfGames, setGameIdClick }: HomePageProps ){
     
     return(
         <>
             <GameShowcase data={showcaseData}/>
 
-            <FeaturedGames data={featureData} />
+            <FeaturedGames data={featureData} defaultListOfGames={defaultListOfGames} />
 
             <RedButtonBlock data={redButtonData} />
 
@@ -27,8 +35,10 @@ function HomePage(){
 
             <CharacterSectionComp data={characterSectionData} />
 
-            <DigitalSectionComp data={bestSellersData} title="Digital best sellers" />
-            <DigitalSectionComp data={newReleasesData} title="Digital new releases" />
+            <DigitalSectionComp data={defaultListOfGames.slice(0, 5)} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(5, 10)} title="Digital new releases" setGameIdClick={setGameIdClick}/>
+            {/* <DigitalSectionComp data={bestSellersData} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
+            <DigitalSectionComp data={newReleasesData} title="Digital new releases" setGameIdClick={setGameIdClick}/> */}
         </>
     );
 }

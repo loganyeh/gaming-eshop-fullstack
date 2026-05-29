@@ -1,5 +1,6 @@
 // hooks
 import { useState } from "react";
+import { Link } from "react-router";
 
 // types 
 import type { WishlistSchemaProp } from "../../pages/Wishlist";
@@ -7,9 +8,10 @@ import type { WishlistSchemaProp } from "../../pages/Wishlist";
 type GamesWishlistedProp = {
     data: WishlistSchemaProp[],
     setWishlistData: React.Dispatch<React.SetStateAction<WishlistSchemaProp[]>>,
+    setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function GamesWishlisted({ data, setWishlistData }: GamesWishlistedProp ){
+function GamesWishlisted({ data, setWishlistData, setGameIdClick }: GamesWishlistedProp ){
     const [removedGames, setRemovedGames] = useState<string[]>([]);
 
     async function removeGame(_id: string){
@@ -39,14 +41,14 @@ function GamesWishlisted({ data, setWishlistData }: GamesWishlistedProp ){
             <section className="px-3.5 xl:flex xl:flex-col xl:items-center">
                 {data.map((game, index) => {
                     return <div key={index} className={`${data.length - 1 === index ? "" : "border-b border-gray-300"} flex flex-col gap-4 py-8 md:flex-row md:justify-between md:items-center xl:w-full xl:max-w-6xl`}>
-                        <div className="flex items-center gap-5 md:w-full md:max-w-md lg:max-w-2xl">
+                        <Link to={"/game"} onClick={() => setGameIdClick(game.gameID)} className="border flex items-center gap-5 md:w-full md:max-w-md lg:max-w-2xl">
                             <img src={game.background_image} alt="" className="w-28 aspect-square object-cover object-center rounded-lg md:w-32 md:shrink-0" />
 
                             <div className="flex flex-col text-gray-700 tracking-wide lg:gap-0.5">
                                 <p className="text-lg font-bold md:text-xl md:line-clamp-3">{game.name}</p>
                                 <time className="text-sm md:text-base">1/1/2000</time>
                             </div>
-                        </div>
+                        </Link>
 
                         <div className="flex justify-between items-center md:gap-5 md:tracking-wide">
                             <p className="text-sm font-semibold text-gray-700 md:text-base">$19.99</p>

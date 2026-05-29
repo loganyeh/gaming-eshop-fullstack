@@ -25,9 +25,9 @@ function Header({ data, handleNavClick }: HeaderProp){
                     </Link>
 
                     {data.map((header, index) => {
-                        return <Link to={index === 1 ? "/search" : "#"} key={index} className="flex items-center gap-1">
+                        return <Link to={index === 1 ? "/search" : "#"} key={index} className={`flex items-center gap-1 ${index === 1 ? "cursor-pointer" : "cursor-default"}`}>
                                 <i className={`${header.boxicon} text-xl text-red-600`}></i>
-                                <h2 className="font-semibold text-gray-700">{header.text}</h2>
+                                <h2 className={`font-semibold text-gray-700 ${index === 1 ? "hover:text-red-600" : ""}`}>{header.text}</h2>
                             </Link>
                     })}
                 </div>

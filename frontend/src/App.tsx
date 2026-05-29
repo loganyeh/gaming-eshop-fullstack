@@ -11,6 +11,8 @@ import Layout from './layout/Layout';
 
 // api
 import { fetchGames, fetchID } from './api/rawg';
+import { fetchAListOfGames } from './api/rawg';
+
   // types
 import type { GamesObject } from './api/rawg';
 
@@ -19,6 +21,7 @@ function App() {
   const [listOfGames, setListOfGames] = useState<GamesObject[]>([]);
   const [gameIdClick, setGameIdClick] = useState<number>(654);
   const [gameInfoData, setGameInfoData] = useState<GamesObject | null>(null);
+  const [defaultListOfGames, setDefaultListOfGames] = useState<GamesObject[]>([]);
 
   // for listOfGames
   useEffect(() => {
@@ -47,15 +50,27 @@ function App() {
     getId();
   }, [gameIdClick]);
 
+  // default list of games
+  useEffect(() => {
+    async function getAListOfGames(){
+        const data = await fetchAListOfGames();
+        setDefaultListOfGames(data);
+
+        return data;
+    };
+
+    getAListOfGames();
+}, []);
+
 
   return (
     <>
       <Routes>
         <Route element={<Layout searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames} setGameIdClick={setGameIdClick} />}>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<HomePage defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} />} />
           <Route path='/game' element={<GameInfoPage gameInfoData={gameInfoData} />} />
-          <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} />} />
-          <Route path='/wishlist' element={<Wishlist />} />
+          <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} defaultListOfGames={defaultListOfGames} />} />
+          <Route path='/wishlist' element={<Wishlist setGameIdClick={setGameIdClick} />} />
         </Route>
       </Routes>
     </>
