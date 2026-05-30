@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 // components
 import Notice from "../components/WishlistComps/Notice";

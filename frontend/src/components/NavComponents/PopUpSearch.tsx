@@ -1,6 +1,3 @@
-// state
-import { useState, useEffect } from "react";
-
 // comps
 import SearchInput from "./SearchInput";
 import TrendingTopics from "./TrendingTopics";
@@ -16,7 +13,6 @@ import type { GamesObject } from "../../api/rawg";
 
 type PopUpSearchProp = {
     loading: boolean,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     isSearchPopUp: boolean,
     setIsSearchPopUp: React.Dispatch<React.SetStateAction<boolean>>,
     searchQuery: string,
@@ -25,7 +21,7 @@ type PopUpSearchProp = {
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function PopUpSearch({ loading, setLoading, isSearchPopUp, setIsSearchPopUp, searchQuery, setSearchQuery, listOfGames, setGameIdClick }: PopUpSearchProp ){
+function PopUpSearch({ loading, isSearchPopUp, setIsSearchPopUp, searchQuery, setSearchQuery, listOfGames, setGameIdClick }: PopUpSearchProp ){
 
     return(
         <>
@@ -36,7 +32,7 @@ function PopUpSearch({ loading, setLoading, isSearchPopUp, setIsSearchPopUp, sea
                 <div className="flex flex-col justify-center xl:items-center 2xl:items-start gap-6 xl:p-6 xl:pb-14 2xl:px-28 w-full bg-white">
                     <div className="flex flex-col xl:flex-row xl:justify-between gap-6 xl:w-full xl:max-w-7xl 2xl:max-w-[1550px]">
                         { !searchQuery && <TrendingTopics data={trendingTopics} /> }
-                        { searchQuery && <TopStoreProducts loading={loading} setLoading={setLoading} listOfGames={listOfGames} isSearchPopUp={isSearchPopUp} setisSearchPopUp={setIsSearchPopUp} setGameIdClick={setGameIdClick} />}
+                        { searchQuery && <TopStoreProducts loading={loading} listOfGames={listOfGames} setisSearchPopUp={setIsSearchPopUp} setGameIdClick={setGameIdClick} />}
                     </div>
 
                     { searchQuery && <AdditionalResults data={externalLinks} /> }

@@ -5,14 +5,12 @@ import type { GamesObject } from "../../api/rawg";
 
 type TopStoreProductsProp = {
     loading: boolean,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    isSearchPopUp: boolean,
     setisSearchPopUp: React.Dispatch<React.SetStateAction<boolean>>,
     listOfGames: GamesObject[],
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function TopStoreProducts({ loading, setLoading, listOfGames, isSearchPopUp, setisSearchPopUp, setGameIdClick }: TopStoreProductsProp ){
+function TopStoreProducts({ loading, listOfGames, setisSearchPopUp, setGameIdClick }: TopStoreProductsProp ){
 
     return(
         <>

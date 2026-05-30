@@ -73,10 +73,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route element={<Layout loading={loading} setLoading={setLoading} searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames} setGameIdClick={setGameIdClick} />}>
-          <Route path='/' element={<HomePage defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
-          <Route path='/game' element={<GameInfoPage gameInfoData={gameInfoData} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
-          <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} defaultListOfGames={defaultListOfGames} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
+        <Route element={<Layout loading={loading} searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames} setGameIdClick={setGameIdClick} />}>
+          <Route path='/' element={<HomePage defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} wishlistData={wishlistData} />} />
+          {gameInfoData && <Route path='/game' element={<GameInfoPage gameInfoData={gameInfoData} wishlistData={wishlistData} />} />}
+          <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} defaultListOfGames={defaultListOfGames} wishlistData={wishlistData} />} />
           <Route path='/wishlist' element={<Wishlist setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
         </Route>
       </Routes>

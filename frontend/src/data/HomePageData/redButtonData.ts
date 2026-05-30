@@ -7,7 +7,7 @@ export type RedButtonType = {
     urlMD: string,
 };
 
-export const redButtonData: RedButtonType[] = [
+export const RedButtonData: RedButtonType[] = [
     {
         title: "Nintendo Today!", 
         description: "Your movie companion: Nintendo Today!", 

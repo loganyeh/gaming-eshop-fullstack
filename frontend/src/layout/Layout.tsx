@@ -19,14 +19,13 @@ import type { GamesObject } from "../api/rawg";
 
 type LayoutProps = {
   loading: boolean,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   searchQuery: string,
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>,
   listOfGames: GamesObject[],
   setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function Layout({ loading, setLoading, searchQuery, setSearchQuery, listOfGames, setGameIdClick }: LayoutProps ){
+function Layout({ loading, searchQuery, setSearchQuery, listOfGames, setGameIdClick }: LayoutProps ){
   const navigate = useNavigate();
   const [isSearchPopUp, setIsSearchPopUp] = useState(false);
   useEffect(() => {
@@ -57,7 +56,7 @@ function Layout({ loading, setLoading, searchQuery, setSearchQuery, listOfGames,
     <>  
       <Header data={headerData} handleNavClick={handleNavClick} />
       <BottomNav data={navButtons} handleNavClick={handleNavClick} />
-      <PopUpSearch loading={loading} setLoading={setLoading}  
+      <PopUpSearch loading={loading} 
       isSearchPopUp={isSearchPopUp} setIsSearchPopUp={setIsSearchPopUp} 
       searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames}
       setGameIdClick={setGameIdClick} />

@@ -1,4 +1,4 @@
-import type { RedButtonType } from "../../data/HomePageData/RedButtonData";
+import type { RedButtonType } from "../../data/HomePageData/redButtonData";
 
 type RedButtonProp = {
     data: RedButtonType[],

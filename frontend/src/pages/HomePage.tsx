@@ -7,11 +7,9 @@ import DigitalSectionComp from "../components/HomePageComponents/DigitalSectionC
 
 // DATA imports
 import { showcaseData } from "../data/HomePageData/showcaseData";
-import { featureData } from "../data/HomePageData/featureData";
-import { redButtonData } from "../data/HomePageData/RedButtonData";
+import { RedButtonData } from "../data/HomePageData/redButtonData";
 import { bigNewsArticlesData, smallNewsArticlesData } from "../data/HomePageData/NewsData";
 import { characterSectionData } from "../data/HomePageData/CharacterSectionData";
-import { bestSellersData, newReleasesData } from "../data/HomePageData/DigitalData";
 
 // types
 import type { GamesObject } from "../api/rawg";
@@ -21,25 +19,24 @@ type HomePageProps = {
     defaultListOfGames: GamesObject[],
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
     wishlistData: WishlistSchemaProp[],
-    setWishlistData: React.Dispatch<React.SetStateAction<WishlistSchemaProp[]>>,
 };
 
-function HomePage({ defaultListOfGames, setGameIdClick, wishlistData, setWishlistData }: HomePageProps ){
+function HomePage({ defaultListOfGames, setGameIdClick, wishlistData }: HomePageProps ){
     
     return(
         <>
             <GameShowcase data={showcaseData}/>
 
-            <FeaturedGames data={featureData} defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} />
+            <FeaturedGames defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} />
 
-            <RedButtonBlock data={redButtonData} />
+            <RedButtonBlock data={RedButtonData} />
 
             <NewsSectionComp bigNewsData={bigNewsArticlesData} smallNewsData={smallNewsArticlesData} />
 
             <CharacterSectionComp data={characterSectionData} />
 
-            <DigitalSectionComp data={defaultListOfGames.slice(0, 1)} title="Digital best sellers" setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData}/>
-            <DigitalSectionComp data={defaultListOfGames.slice(2, 3)} title="Digital new releases" setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(0, 1)} title="Digital best sellers" setGameIdClick={setGameIdClick} wishlistData={wishlistData}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(2, 3)} title="Digital new releases" setGameIdClick={setGameIdClick} wishlistData={wishlistData}/>
             {/* <DigitalSectionComp data={bestSellersData} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
             <DigitalSectionComp data={newReleasesData} title="Digital new releases" setGameIdClick={setGameIdClick}/> */}
         </>

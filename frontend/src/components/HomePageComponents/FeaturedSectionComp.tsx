@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
-import type { featureType } from "../../data/HomePageData/featureData";
 import type { GamesObject } from "../../api/rawg";
 
 type featureProp = {
-    data: featureType[],
     defaultListOfGames: GamesObject[],
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function FeaturedGames({ data, defaultListOfGames, setGameIdClick }: featureProp){
+function FeaturedGames({ defaultListOfGames, setGameIdClick }: featureProp){
 
     return(
         <>
