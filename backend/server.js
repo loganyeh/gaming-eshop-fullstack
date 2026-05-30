@@ -3,12 +3,14 @@ import cors from "cors";
 import mongoose from "mongoose";
 import Wishlist from "./models/Wishlist.js";
 
+const MONGO_URI = "mongodb+srv://loganyehdev_db_user:3AegTqokMycV0KP0@cluster0.cetpm2m.mongodb.net/?appName=Cluster0";
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://loganyehdev_db_user:3AegTqokMycV0KP0@cluster0.cetpm2m.mongodb.net/?appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log(`Error: ${err}`));
 
@@ -59,7 +61,7 @@ app.delete("/wishlist/:id", async (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on Port 3000");
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server running");
 });
 
