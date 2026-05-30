@@ -1,3 +1,5 @@
+console.log("🔥 SERVER STARTED");
+
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -33,17 +35,24 @@ app.get("/wishlist/:gameID", async(req, res) => {
     res.json(wishlistItem);
 });
 
-app.post("/wishlist", async(req, res) => {
-    const wishlistItem = await Wishlist.create({
-        gameID: req.body.gameID,
-        name: req.body.name,
-        background_image: req.body.background_image,
-    });
+app.post("/wishlist", async (req, res) => {
+    try {
+        console.log("REQ BODY:", req.body);
 
-    res.json({
-        message: `${wishlistItem.name} has been added to the wishlist`,
-        data: wishlistItem,
-    });
+        const wishlistItem = await Wishlist.create({
+            gameID: req.body.gameID,
+            name: req.body.name,
+            background_image: req.body.background_image,
+        });
+
+        res.json({
+            message: `${wishlistItem.name} has been added to the wishlist`,
+            data: wishlistItem,
+        });
+    } catch (err) {
+        console.error("POST /wishlist error:", err);
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
 });
 
 app.delete("/wishlist/:id", async (req, res) => {

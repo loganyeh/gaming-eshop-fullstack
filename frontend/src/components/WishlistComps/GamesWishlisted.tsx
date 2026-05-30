@@ -15,7 +15,7 @@ function GamesWishlisted({ data, setWishlistData, setGameIdClick }: GamesWishlis
     const [removedGames, setRemovedGames] = useState<string[]>([]);
 
     async function removeGame(_id: string){
-        const res = await fetch(`https://gaming-eshop-fullstack-1.onrender.com/wishlist/${_id}`, {
+        const res = await fetch(`http://localhost:3000/wishlist/${_id}`, {
             method: "DELETE",  
         });
 
