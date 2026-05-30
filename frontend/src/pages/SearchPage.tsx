@@ -34,7 +34,7 @@ function SearchPage({ listOfGames, setGameIdClick, defaultListOfGames, wishlistD
             {listOfGames.length === 0 ?
             <DigitalSectionComp data={defaultListOfGames.slice(0, 1)} title="Game results" setGameIdClick={setGameIdClick} wishlistData={wishlistData} />
             :
-            <DigitalSectionComp data={listOfGames} title="Game results" setGameIdClick={setGameIdClick} wishlistData={wishlistData} />
+            <DigitalSectionComp data={listOfGames.slice(0, 5)} title="Game results" setGameIdClick={setGameIdClick} wishlistData={wishlistData} />
             }
 
             <div className="flex flex-col items-center">
