@@ -1,5 +1,4 @@
 const API_KEY = "98cbf69e366348d6b54d6db7481687f2";
-// let game_query = "mario";
 
 // FETCH GAMES EXPORT DATA --------------------
 type GamesDataObject = {

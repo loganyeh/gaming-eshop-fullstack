@@ -1,5 +1,3 @@
-console.log("🔥 SERVER STARTED");
-
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -12,7 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-console.log("MONGO_URI exists?", !!process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log(`Error: ${err}`));
@@ -37,11 +34,7 @@ app.get("/wishlist/:gameID", async(req, res) => {
 });
 
 app.post("/wishlist", async (req, res) => {
-    console.log("🔥 HIT POST /wishlist");
-    console.log("BODY:", req.body);
     try {
-        // console.log("REQ BODY:", req.body);
-
         const wishlistItem = await Wishlist.create({
             gameID: req.body.gameID,
             name: req.body.name,

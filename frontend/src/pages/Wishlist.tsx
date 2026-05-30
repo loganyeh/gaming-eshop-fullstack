@@ -23,14 +23,12 @@ type WishlistProps = {
 };
 
 function Wishlist({ setGameIdClick, wishlistData, setWishlistData }: WishlistProps ){
-    // const [wishlistData, setWishlistData] = useState<WishlistSchemaProp[]>([]);
 
     useEffect(() => {
         async function getWishlist(){
             const res = await fetch("https://gaming-eshop-fullstack-1.onrender.com/wishlist");
             const data = await res.json();
             setWishlistData(data);
-            // console.log(data);
     
             return data;
         };

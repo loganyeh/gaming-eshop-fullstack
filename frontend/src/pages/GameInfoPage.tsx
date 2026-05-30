@@ -18,7 +18,6 @@ type GameInfoPageProps = {
     wishlistData: WishlistSchemaProp[],
 };
 
-
 function GameInfoPage({ gameInfoData, wishlistData }: GameInfoPageProps ){
 
     return(
