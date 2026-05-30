@@ -25,7 +25,7 @@ function TopStoreProducts({ loading, listOfGames, setisSearchPopUp, setGameIdCli
                         </div>
                     </div>}
 
-                    {!loading && listOfGames.slice(0, 1).map((game, _) => {
+                    {!loading && listOfGames.slice(0, 6).map((game, _) => {
                         return <Link to={"/game"} onClick={() => {setisSearchPopUp(false), setGameIdClick(game.id)}} key={game.id} className="border border-gray-300 flex gap-3 p-2 rounded-md">
                             <img src={game.background_image} alt="" className="w-24 aspect-square object-cover object-center bg-blue-300 rounded-md"/>
 
