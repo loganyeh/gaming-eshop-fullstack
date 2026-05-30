@@ -14,7 +14,7 @@ type DigitalProp = {
 function DigitalSectionComp({ data, title, setGameIdClick, wishlistData }: DigitalProp ){
     
     async function addGameToWishlist(game: GamesObject){
-        const res = await fetch("http://localhost:3000/wishlist", {
+        const res = await fetch("https://gaming-eshop-fullstack-1.onrender.com/wishlist", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
