@@ -36,8 +36,10 @@ app.get("/wishlist/:gameID", async(req, res) => {
 });
 
 app.post("/wishlist", async (req, res) => {
+    console.log("🔥 HIT POST /wishlist");
+    console.log("BODY:", req.body);
     try {
-        console.log("REQ BODY:", req.body);
+        // console.log("REQ BODY:", req.body);
 
         const wishlistItem = await Wishlist.create({
             gameID: req.body.gameID,
