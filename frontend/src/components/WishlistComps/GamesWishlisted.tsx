@@ -15,17 +15,26 @@ function GamesWishlisted({ data, setWishlistData, setGameIdClick }: GamesWishlis
     const [removedGames, setRemovedGames] = useState<string[]>([]);
 
     async function removeGame(_id: string){
-        const res = await fetch(`https://gaming-eshop-fullstack-1.onrender.com/wishlist/${_id}`, {
-            method: "DELETE",  
-        });
+        try {
+            const res = await fetch(`https://gaming-eshop-fullstack-1.onrender.com/wishlist/${_id}`, {
+                method: "DELETE",  
+            });
 
-        const data = await res.json();
-
-        setWishlistData(prev => 
-            prev.filter(game => game._id !== _id)
-        );
-
-        return data;
+            if(!res.ok){
+                throw new Error("Failed to remove game");
+            };
+    
+            const data = await res.json();
+    
+            setWishlistData(prev => 
+                prev.filter(game => game._id !== _id)
+            );
+    
+            return data;
+            
+        } catch (error) {
+            console.error(`Wishlist DELETE request failed`, error);
+        };
     };
 
     return(

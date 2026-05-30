@@ -14,20 +14,29 @@ type DigitalProp = {
 function DigitalSectionComp({ data, title, setGameIdClick, wishlistData }: DigitalProp ){
     
     async function addGameToWishlist(game: GamesObject){
-        const res = await fetch("https://gaming-eshop-fullstack-1.onrender.com/wishlist", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ 
-                gameID: game.id,
-                name: game.name,
-                background_image: game.background_image,
-             }),
-        });
+        try {
+            const res = await fetch("https://gaming-eshop-fullstack-1.onrender.com/wishlist", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ 
+                    gameID: game.id,
+                    name: game.name,
+                    background_image: game.background_image,
+                 }),
+            });
 
-        const data = await res.json();
-        console.log(`wishlist response`, data);
+            if(!res.ok){
+                throw new Error("Failed to add game to wishlist");
+            };
+    
+            const data = await res.json();
+            console.log(`wishlist response`, data);
+            
+        } catch (error) {
+            console.error(`Wishlist POST request failed`, error);
+        };
     };   
 
     function wishlistToggle(gameID: number){

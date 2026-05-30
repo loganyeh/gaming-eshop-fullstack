@@ -26,11 +26,20 @@ function Wishlist({ setGameIdClick, wishlistData, setWishlistData }: WishlistPro
 
     useEffect(() => {
         async function getWishlist(){
-            const res = await fetch("https://gaming-eshop-fullstack-1.onrender.com/wishlist");
-            const data = await res.json();
-            setWishlistData(data);
-    
-            return data;
+            try {
+                const res = await fetch("https://gaming-eshop-fullstack-1.onrender.com/wishlist");
+
+                if(!res.ok) {
+                    throw new Error("Failed to fetch Wishlist");
+                };
+
+                const data = await res.json();
+                setWishlistData(data);
+        
+                return data;
+            } catch (error) {
+                console.error(`Wishlist fetch error`, error);
+            };
         };
 
         getWishlist();

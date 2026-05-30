@@ -26,6 +26,7 @@ function App() {
   const [defaultListOfGames, setDefaultListOfGames] = useState<GamesObject[]>([]);
   const [wishlistData, setWishlistData] = useState<WishlistSchemaProp[]>([]);
 
+  // add ERROR HANDLING IN THE API FETCHES
   // for listOfGames
   useEffect(() => {
     const timeout = setTimeout(() => {
