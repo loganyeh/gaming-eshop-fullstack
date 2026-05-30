@@ -35,8 +35,8 @@ function HomePage({ defaultListOfGames, setGameIdClick, wishlistData }: HomePage
 
             <CharacterSectionComp data={characterSectionData} />
 
-            <DigitalSectionComp data={defaultListOfGames.slice(0, 1)} title="Digital best sellers" setGameIdClick={setGameIdClick} wishlistData={wishlistData}/>
-            <DigitalSectionComp data={defaultListOfGames.slice(2, 3)} title="Digital new releases" setGameIdClick={setGameIdClick} wishlistData={wishlistData}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(0, 10)} title="Digital best sellers" setGameIdClick={setGameIdClick} wishlistData={wishlistData}/>
+            <DigitalSectionComp data={defaultListOfGames.slice(10, 20)} title="Digital new releases" setGameIdClick={setGameIdClick} wishlistData={wishlistData}/>
             {/* <DigitalSectionComp data={bestSellersData} title="Digital best sellers" setGameIdClick={setGameIdClick}/>
             <DigitalSectionComp data={newReleasesData} title="Digital new releases" setGameIdClick={setGameIdClick}/> */}
         </>

@@ -49,14 +49,14 @@ function DigitalSectionComp({ data, title, setGameIdClick, wishlistData }: Digit
                     {/* Game Slideshow */}
                     <div className="flex gap-8 pt-8 pb-6 pl-5 overflow-x-auto xl:pl-8">
                         {data.map((game, _) => {
-                            return <div key={game.id} className="border border-gray-300 rounded-lg">
+                            return <div key={game.id} className="border border-gray-300 rounded-lg shrink-0">
                                 <Link to={"/game"} onClick={() => {setGameIdClick?.(game.id)}} className="">
-                                    <img alt="" className="w-52 aspect-square bg-gray-300 bg-center bg-cover rounded-t-lg md:w-64 object-cover object-center"/>
+                                    <img src={"background_image" in game ? game.background_image : game.url} alt="" className="w-52 aspect-square bg-gray-300 rounded-t-lg md:w-64 object-cover object-center"/>
                                 </Link>
 
                                 <div className="flex flex-col gap-2 p-2 pt-4 md:p-4">
                                     <div className="min-h-16">
-                                        <h3 className="text-sm font-bold text-gray-700 line-clamp-2 md:text-base">game.name</h3>
+                                        <h3 className="text-sm font-bold text-gray-700 line-clamp-2 md:text-base">{"name" in game ? game.name : game.gameTitle}</h3>
                                         <time className="block text-[10px] font-light text-gray-500 md:text-xs">00/00/2000</time>
                                         {/* the ^ moves when changing from div to time ??? */}
                                     </div>
