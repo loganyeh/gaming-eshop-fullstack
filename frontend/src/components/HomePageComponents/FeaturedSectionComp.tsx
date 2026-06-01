@@ -19,9 +19,26 @@ function FeaturedGames({ defaultGamesLoading, defaultListOfGames, setGameIdClick
                 {/* <i className='bx bx-loader text-3xl text-gray-600 animate-spin'></i> */}
                 {/* Featured Games */}
                 <div className="flex gap-6 py-5 overflow-x-auto lg:pl-4 xl:pl-0 ">
-                    {defaultGamesLoading && Array.from({ length: 10 }).map((_, index) => {
-                        return <div key={index} className="border border-gray-300 flex justify-center items-center h-64 md:h-[316px] w-52 rounded-lg shrink-0 md:w-64 ">
-                            <i className='bx bx-loader text-3xl text-gray-600 animate-spin'></i>
+                    {/* Loading State */}
+                    {defaultGamesLoading && Array.from({ length: 2 }).map((_, index) => {
+                        return <div key={index} className="border border-gray-300 h-64 md:h-[316px] w-52 rounded-lg shrink-0 md:w-64 animate-pulse">
+                            <div className="border-b border-gray-300 w-full aspect-video bg-gray-300 rounded-t-lg"></div>
+
+                            <div className="flex flex-col px-2 py-4">
+                                <div className="h-[72px] md:h-24">
+                                    <div className="p-3 bg-gray-300"></div>
+                                </div>
+
+                                <div className="flex flex-col gap-1.5">
+                                    <div className={`px-2 w-fit bg-gray-300 rounded-full md:px-2.5`}>
+                                        <div className="bg-gray-300 px-8 py-2"></div>
+                                    </div>
+                                    <div className={`border-l-2 border-gray-300 pl-1 md:pl-2`}>
+                                        <div className="bg-gray-300 p-2.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     })}
 
@@ -48,7 +65,6 @@ function FeaturedGames({ defaultGamesLoading, defaultListOfGames, setGameIdClick
                             </div>
                         </div>
                     })}
-
                 </div>
             </section>
         </>
