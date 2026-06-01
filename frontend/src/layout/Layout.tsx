@@ -28,6 +28,7 @@ type LayoutProps = {
 function Layout({ loading, searchQuery, setSearchQuery, listOfGames, setGameIdClick }: LayoutProps ){
   const navigate = useNavigate();
   const [isSearchPopUp, setIsSearchPopUp] = useState(false);
+  
   useEffect(() => {
       if (isSearchPopUp) {
         document.body.style.overflow = "hidden";

@@ -14,22 +14,50 @@ export type GamesObject = {
 };
 
 export async function fetchGames(query: string){
-    const res = await fetch(`https://api.rawg.io/api/games?search=${query}&key=${API_KEY}`);
-    const data: GamesDataObject = await res.json();
-    return data.results; 
+    try {
+        const res = await fetch(`https://api.rawg.io/api/games?search=${query}&key=${API_KEY}`);
+
+        if (!res.ok) {
+            throw new Error(`Fetching to fetch games`);
+        }
+
+        const data: GamesDataObject = await res.json();
+        return data.results; 
+        
+    } catch (error) {
+        console.error(`Error fetching games:`, error);
+    };
 };
 
 // FETCH ID EXPORT DATA --------------------
 export async function fetchID(id: number){
-    const res = await fetch(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
-    const data: GamesObject = await res.json();
-    return data; 
+    try {
+        const res = await fetch(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
+
+        if (!res.ok) {
+            throw new Error(`Failed to to fetch game details by ID`);
+        };
+
+        const data: GamesObject = await res.json();
+        return data; 
+        
+    } catch (error) {
+        console.error(`Error fetching ID:`, error);
+    };
 };
 
 // FETCH GET A LIST OF GAMES
 export async function fetchAListOfGames(){
-    const res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}`);
-    const data: GamesDataObject = await res.json();
+    try {
+        const res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}`);
 
-    return data.results;
+        if (!res.ok) {
+            throw new Error(`Failed to fetch game list`);
+        };
+        
+        const data: GamesDataObject = await res.json();
+        return data.results;
+    } catch (error) {
+        console.error(`Error fetching List of Games:`, error);
+    };
 };

@@ -70,7 +70,6 @@ function App() {
     getAListOfGames();
 }, []);
 
-
   return (
     <>
       <Routes>
@@ -85,4 +84,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
