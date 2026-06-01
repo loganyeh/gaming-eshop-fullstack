@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import type { GamesObject } from "../../api/rawg";
 
 type featureProp = {
+    defaultGamesLoading: boolean,
     defaultListOfGames: GamesObject[],
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function FeaturedGames({ defaultListOfGames, setGameIdClick }: featureProp){
+function FeaturedGames({ defaultGamesLoading, defaultListOfGames, setGameIdClick }: featureProp){
 
     return(
         <>
@@ -15,9 +16,16 @@ function FeaturedGames({ defaultListOfGames, setGameIdClick }: featureProp){
                 {/* Title */}
                 <h2 className="text-xl font-bold text-gray-600 tracking-wider md:text-3xl 2xl:pl-[216px] ">Featured</h2>
 
+                {/* <i className='bx bx-loader text-3xl text-gray-600 animate-spin'></i> */}
                 {/* Featured Games */}
                 <div className="flex gap-6 py-5 overflow-x-auto lg:pl-4 xl:pl-0 ">
-                    {defaultListOfGames.slice(0, 3).map((game, index) => {
+                    {defaultGamesLoading && Array.from({ length: 10 }).map((_, index) => {
+                        return <div key={index} className="border border-gray-300 flex justify-center items-center h-64 md:h-[316px] w-52 rounded-lg shrink-0 md:w-64 ">
+                            <i className='bx bx-loader text-3xl text-gray-600 animate-spin'></i>
+                        </div>
+                    })}
+
+                    {!defaultGamesLoading && defaultListOfGames.slice(0, 3).map((game, index) => {
                         return <div key={index} className="border border-gray-300 w-52 rounded-lg shrink-0 md:w-64 ">
                             {/* Game Image */}
                             <Link to={"/game"}>

@@ -16,18 +16,19 @@ import type { GamesObject } from "../api/rawg";
 import type { WishlistSchemaProp } from "./Wishlist";
 
 type HomePageProps = {
+    defaultGamesLoading: boolean
     defaultListOfGames: GamesObject[],
     setGameIdClick: React.Dispatch<React.SetStateAction<number>>,
     wishlistData: WishlistSchemaProp[],
 };
 
-function HomePage({ defaultListOfGames, setGameIdClick, wishlistData }: HomePageProps ){
+function HomePage({ defaultGamesLoading, defaultListOfGames, setGameIdClick, wishlistData }: HomePageProps ){
     
     return(
         <>
             <GameShowcase data={showcaseData}/>
 
-            <FeaturedGames defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} />
+            <FeaturedGames defaultGamesLoading={defaultGamesLoading} defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} />
 
             <RedButtonBlock data={RedButtonData} />
 

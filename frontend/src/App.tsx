@@ -18,7 +18,8 @@ import type { GamesObject } from './api/rawg';
 import type { WishlistSchemaProp } from './pages/Wishlist';
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [defaultGamesLoading, setDefaultGamesLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [listOfGames, setListOfGames] = useState<GamesObject[]>([]);
   const [gameIdClick, setGameIdClick] = useState<number>(654);
@@ -26,22 +27,23 @@ function App() {
   const [defaultListOfGames, setDefaultListOfGames] = useState<GamesObject[]>([]);
   const [wishlistData, setWishlistData] = useState<WishlistSchemaProp[]>([]);
 
-  // add ERROR HANDLING IN THE API FETCHES
   // for listOfGames
   useEffect(() => {
     const timeout = setTimeout(() => {
       async function getGames(){
         setLoading(true);
-
-        const data = await fetchGames(searchQuery);
-        setListOfGames(data);
-        // console.log(data.slice(0, 6));
-
-        setLoading(false);
+        try {
+          const data = await fetchGames(searchQuery);
+          setListOfGames(data ?? []);
+          // console.log(data.slice(0, 6));
+        } catch (error) {
+          console.error(`Data failed to load:`, error);
+        } finally {
+          setLoading(false);
+        }
       };
 
       if (searchQuery) getGames();
-
     }, 1000);
     // change number back down to limit api requests
 
@@ -61,8 +63,12 @@ function App() {
   // default list of games
   useEffect(() => {
     async function getAListOfGames(){
+        setDefaultGamesLoading(true);
+
         const data = await fetchAListOfGames();
         setDefaultListOfGames(data);
+
+        setDefaultGamesLoading(false);
 
         return data;
     };
@@ -74,7 +80,7 @@ function App() {
     <>
       <Routes>
         <Route element={<Layout loading={loading} searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames} setGameIdClick={setGameIdClick} />}>
-          <Route path='/' element={<HomePage defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} wishlistData={wishlistData} />} />
+          <Route path='/' element={<HomePage defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} wishlistData={wishlistData} defaultGamesLoading={defaultGamesLoading} />} />
           {gameInfoData && <Route path='/game' element={<GameInfoPage gameInfoData={gameInfoData} wishlistData={wishlistData} />} />}
           <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} defaultListOfGames={defaultListOfGames} wishlistData={wishlistData} />} />
           <Route path='/wishlist' element={<Wishlist setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
