@@ -20,6 +20,7 @@ import type { WishlistSchemaProp } from './pages/Wishlist';
 function App() {
   const [loading, setLoading] = useState(true);
   const [defaultGamesLoading, setDefaultGamesLoading] = useState(true);
+  const [gameInfoLoading, setGameInfoLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [listOfGames, setListOfGames] = useState<GamesObject[]>([]);
   const [gameIdClick, setGameIdClick] = useState<number>(654);
@@ -53,8 +54,12 @@ function App() {
   // for gameIdClick
   useEffect(() => {
     async function getId(){
+      setGameInfoLoading(true);
+
       const data = await fetchID(gameIdClick);
       setGameInfoData(data);
+
+      setGameInfoLoading(false);
     }
 
     getId();
@@ -81,7 +86,7 @@ function App() {
       <Routes>
         <Route element={<Layout loading={loading} searchQuery={searchQuery} setSearchQuery={setSearchQuery} listOfGames={listOfGames} setGameIdClick={setGameIdClick} />}>
           <Route path='/' element={<HomePage defaultListOfGames={defaultListOfGames} setGameIdClick={setGameIdClick} wishlistData={wishlistData} defaultGamesLoading={defaultGamesLoading} />} />
-          {gameInfoData && <Route path='/game' element={<GameInfoPage gameInfoData={gameInfoData} wishlistData={wishlistData} />} />}
+          {gameInfoData && <Route path='/game' element={<GameInfoPage gameInfoLoading={gameInfoLoading} gameInfoData={gameInfoData} wishlistData={wishlistData} />} />}
           <Route path='/search' element={<SearchPage listOfGames={listOfGames} setGameIdClick={setGameIdClick} defaultListOfGames={defaultListOfGames} wishlistData={wishlistData} />} />
           <Route path='/wishlist' element={<Wishlist setGameIdClick={setGameIdClick} wishlistData={wishlistData} setWishlistData={setWishlistData} />} />
         </Route>

@@ -12,10 +12,11 @@ import DownloadBtn from "./GameInfoCardComps/DownloadBtn";
 import type { GamesObject } from "../../api/rawg";
 
 type GameInfoCardProps = {
+    gameInfoLoading: boolean,
     gameInfoData: GamesObject,
 };
 
-function GameInfoCard({ gameInfoData }: GameInfoCardProps ){
+function GameInfoCard({ gameInfoLoading, gameInfoData }: GameInfoCardProps ){
     
 
     return(
@@ -28,7 +29,7 @@ function GameInfoCard({ gameInfoData }: GameInfoCardProps ){
                     <div className="md:flex md:gap-12">
                         {/* Left Side - Game Image Slideshow */}
                         <div className="md:flex md:flex-col md:gap-5 md:w-96 lg:w-130 xl:w-165">
-                            <GameImages background_image={gameInfoData?.background_image} />
+                            <GameImages gameInfoLoading={gameInfoLoading} background_image={gameInfoData?.background_image} />
                             <div className="hidden md:flex items-center h-[72px] lg:w-full lg:max-w-md">
                                 <ESRB />
                             </div>

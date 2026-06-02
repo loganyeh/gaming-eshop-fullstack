@@ -14,16 +14,17 @@ import type { GamesObject } from "../api/rawg";
 import type { WishlistSchemaProp } from "./Wishlist";
 
 type GameInfoPageProps = {
+    gameInfoLoading: boolean,
     gameInfoData: GamesObject,
     wishlistData: WishlistSchemaProp[],
 };
 
-function GameInfoPage({ gameInfoData, wishlistData }: GameInfoPageProps ){
+function GameInfoPage({ gameInfoLoading, gameInfoData, wishlistData }: GameInfoPageProps ){
 
     return(
         <>
             <ShippingHeader />
-            <GameInfoCard gameInfoData={gameInfoData} />
+            <GameInfoCard gameInfoLoading={gameInfoLoading} gameInfoData={gameInfoData} />
             {/* GameInfoCardProps in this ^^ */}
 
             <div className="xl:flex xl:flex-col xl:items-center">
